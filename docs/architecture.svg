@@ -1,0 +1,234 @@
+<svg viewBox="0 0 900 980" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>InfraLens System Architecture</title>
+  <desc>Full system architecture for InfraLens multi-agent AI incident response platform</desc>
+  <style>
+    text { font-family: system-ui, -apple-system, sans-serif; }
+    .title { font-size: 20px; font-weight: 800; fill: #1a1a1a; }
+    .subtitle { font-size: 12px; fill: #777; }
+    .layer-label { font-size: 11px; font-weight: 700; fill: #666; letter-spacing: 1.5px; }
+    .box-title { font-size: 11px; font-weight: 700; fill: #fff; }
+    .box-sub { font-size: 9px; fill: rgba(255,255,255,0.8); }
+    .tech-tag { font-size: 8px; font-weight: 600; fill: #FF9D00; }
+    .outline-title { font-size: 11px; font-weight: 700; fill: #1a1a1a; }
+    .outline-sub { font-size: 9px; fill: #777; }
+    .legend-text { font-size: 9px; fill: #666; }
+    .arrow-line { stroke: #bbb; stroke-width: 1.5; fill: none; }
+    .arrow-bold { stroke: #555; stroke-width: 2; fill: none; }
+    .dash { stroke-dasharray: 5,3; }
+    .section-line { stroke: #ddd; stroke-width: 1; }
+  </style>
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bbb"/></marker>
+    <marker id="ahd" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#555"/></marker>
+  </defs>
+
+  <rect width="900" height="980" fill="#ffffff" rx="0"/>
+
+  <text x="450" y="32" text-anchor="middle" class="title">InfraLens — System Architecture</text>
+  <text x="450" y="50" text-anchor="middle" class="subtitle">Multi-Agent AI Incident Response &amp; Infrastructure Intelligence Platform</text>
+
+  <!-- LAYER 1: DATA SOURCES -->
+  <text x="28" y="82" class="layer-label">DATA SOURCES</text>
+  <line x1="28" y1="88" x2="872" y2="88" class="section-line"/>
+
+  <rect x="28" y="98" width="195" height="56" rx="7" fill="#4A90D9"/>
+  <text x="125" y="119" text-anchor="middle" class="box-title">Alert Streams</text>
+  <text x="125" y="133" text-anchor="middle" class="box-sub">PagerDuty · Datadog · OpsGenie</text>
+  <text x="125" y="147" text-anchor="middle" class="tech-tag">Webhook Receivers (FastAPI)</text>
+
+  <rect x="240" y="98" width="195" height="56" rx="7" fill="#4A90D9"/>
+  <text x="337" y="119" text-anchor="middle" class="box-title">Dashboard Screenshots</text>
+  <text x="337" y="133" text-anchor="middle" class="box-sub">Grafana · CloudWatch · K8s UI</text>
+  <text x="337" y="147" text-anchor="middle" class="tech-tag">Playwright Auto-Capture</text>
+
+  <rect x="452" y="98" width="195" height="56" rx="7" fill="#4A90D9"/>
+  <text x="549" y="119" text-anchor="middle" class="box-title">Logs &amp; Metrics</text>
+  <text x="549" y="133" text-anchor="middle" class="box-sub">ELK · Prometheus · Loki</text>
+  <text x="549" y="147" text-anchor="middle" class="tech-tag">API Pull on Alert Trigger</text>
+
+  <rect x="664" y="98" width="195" height="56" rx="7" fill="#4A90D9"/>
+  <text x="761" y="119" text-anchor="middle" class="box-title">Runbooks &amp; Postmortems</text>
+  <text x="761" y="133" text-anchor="middle" class="box-sub">Confluence · Notion · Git Markdown</text>
+  <text x="761" y="147" text-anchor="middle" class="tech-tag">Indexed at Ingest Time</text>
+
+  <line x1="125" y1="154" x2="125" y2="198" class="arrow-line" marker-end="url(#ah)"/>
+  <line x1="337" y1="154" x2="337" y2="198" class="arrow-line" marker-end="url(#ah)"/>
+  <line x1="549" y1="154" x2="549" y2="198" class="arrow-line" marker-end="url(#ah)"/>
+  <line x1="761" y1="154" x2="761" y2="198" class="arrow-line" marker-end="url(#ah)"/>
+
+  <!-- LAYER 2: HF TASK PROCESSING -->
+  <text x="28" y="195" class="layer-label">HUGGINGFACE TASK PROCESSING</text>
+  <line x1="28" y1="201" x2="872" y2="201" class="section-line"/>
+
+  <rect x="28" y="210" width="195" height="65" rx="7" fill="#E8590C"/>
+  <text x="125" y="231" text-anchor="middle" class="box-title">Text Classification</text>
+  <text x="125" y="244" text-anchor="middle" class="box-sub">Severity Triage (P0–P4)</text>
+  <text x="125" y="256" text-anchor="middle" class="box-sub">Category Routing</text>
+  <text x="125" y="269" text-anchor="middle" class="tech-tag">distilbert fine-tuned</text>
+
+  <rect x="240" y="210" width="195" height="65" rx="7" fill="#E8590C"/>
+  <text x="337" y="231" text-anchor="middle" class="box-title">Visual Question Answering</text>
+  <text x="337" y="244" text-anchor="middle" class="box-sub">Dashboard Anomaly Detection</text>
+  <text x="337" y="256" text-anchor="middle" class="box-sub">Trend &amp; Spike Reading</text>
+  <text x="337" y="269" text-anchor="middle" class="tech-tag">Florence-2 / BLIP-2</text>
+
+  <rect x="452" y="210" width="195" height="65" rx="7" fill="#E8590C"/>
+  <text x="549" y="231" text-anchor="middle" class="box-title">Token Classification (NER)</text>
+  <text x="549" y="244" text-anchor="middle" class="box-sub">Service Names · Error Codes</text>
+  <text x="549" y="256" text-anchor="middle" class="box-sub">Pod Names · IP Addresses</text>
+  <text x="549" y="269" text-anchor="middle" class="tech-tag">bert-base-NER fine-tuned</text>
+
+  <rect x="664" y="210" width="195" height="65" rx="7" fill="#E8590C"/>
+  <text x="761" y="231" text-anchor="middle" class="box-title">Document QA</text>
+  <text x="761" y="244" text-anchor="middle" class="box-sub">Runbook Retrieval &amp; Answering</text>
+  <text x="761" y="256" text-anchor="middle" class="box-sub">Postmortem Pattern Matching</text>
+  <text x="761" y="269" text-anchor="middle" class="tech-tag">LayoutLM / LlamaIndex</text>
+
+  <line x1="125" y1="275" x2="125" y2="320" class="arrow-line" marker-end="url(#ah)"/>
+  <line x1="337" y1="275" x2="337" y2="320" class="arrow-line" marker-end="url(#ah)"/>
+  <line x1="549" y1="275" x2="549" y2="320" class="arrow-line" marker-end="url(#ah)"/>
+  <line x1="761" y1="275" x2="761" y2="320" class="arrow-line" marker-end="url(#ah)"/>
+
+  <rect x="80" y="320" width="730" height="4" rx="2" fill="#ccc"/>
+  <line x1="445" y1="324" x2="445" y2="358" class="arrow-bold" marker-end="url(#ahd)"/>
+
+  <!-- LAYER 3: MULTI-AGENT ORCHESTRATION -->
+  <text x="28" y="355" class="layer-label">MULTI-AGENT ORCHESTRATION</text>
+  <line x1="28" y1="361" x2="872" y2="361" class="section-line"/>
+
+  <rect x="340" y="372" width="210" height="58" rx="8" fill="#1A7F37" stroke="#15692E" stroke-width="1.5"/>
+  <text x="445" y="395" text-anchor="middle" class="box-title" style="font-size:13px;">Supervisor Agent</text>
+  <text x="445" y="410" text-anchor="middle" class="box-sub">Orchestrate · Route · Retry · State</text>
+  <text x="445" y="423" text-anchor="middle" class="tech-tag">LangGraph State Machine</text>
+
+  <rect x="28" y="458" width="195" height="58" rx="7" fill="#2DA44E"/>
+  <text x="125" y="480" text-anchor="middle" class="box-title">Triage Agent</text>
+  <text x="125" y="493" text-anchor="middle" class="box-sub">Classify · Blast Radius · Route</text>
+  <text x="125" y="509" text-anchor="middle" class="tech-tag">First Responder</text>
+
+  <rect x="240" y="458" width="195" height="58" rx="7" fill="#2DA44E"/>
+  <text x="337" y="480" text-anchor="middle" class="box-title">Diagnosis Agent</text>
+  <text x="337" y="493" text-anchor="middle" class="box-sub">Root Cause Analysis · Correlate</text>
+  <text x="337" y="509" text-anchor="middle" class="tech-tag">Reasoning (Claude / GPT-4o)</text>
+
+  <rect x="452" y="458" width="195" height="58" rx="7" fill="#2DA44E"/>
+  <text x="549" y="480" text-anchor="middle" class="box-title">Runbook Agent</text>
+  <text x="549" y="493" text-anchor="middle" class="box-sub">RAG Retrieval · Fix Steps</text>
+  <text x="549" y="509" text-anchor="middle" class="tech-tag">LlamaIndex + pgvector</text>
+
+  <rect x="664" y="458" width="195" height="58" rx="7" fill="#2DA44E"/>
+  <text x="761" y="480" text-anchor="middle" class="box-title">Comms Agent</text>
+  <text x="761" y="493" text-anchor="middle" class="box-sub">Slack · Status Page · Escalate</text>
+  <text x="761" y="509" text-anchor="middle" class="tech-tag">Webhook + Templates</text>
+
+  <line x1="370" y1="430" x2="125" y2="458" class="arrow-line" marker-end="url(#ah)"/>
+  <line x1="415" y1="430" x2="337" y2="458" class="arrow-line" marker-end="url(#ah)"/>
+  <line x1="475" y1="430" x2="549" y2="458" class="arrow-line" marker-end="url(#ah)"/>
+  <line x1="520" y1="430" x2="761" y2="458" class="arrow-line" marker-end="url(#ah)"/>
+
+  <rect x="620" y="375" width="148" height="40" rx="6" fill="none" stroke="#CF222E" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="694" y="392" text-anchor="middle" style="font-size:10px; font-weight:600; fill:#CF222E;">Human-in-the-Loop</text>
+  <text x="694" y="405" text-anchor="middle" style="font-size:8px; fill:#CF222E;">P0/P1 Approval Gate</text>
+  <line x1="620" y1="395" x2="550" y2="401" class="arrow-line dash" style="stroke:#CF222E;" marker-end="url(#ah)"/>
+
+  <line x1="337" y1="516" x2="337" y2="570" class="arrow-line" marker-end="url(#ah)"/>
+  <line x1="549" y1="516" x2="549" y2="570" class="arrow-line" marker-end="url(#ah)"/>
+
+  <!-- LAYER 4: RAG & KNOWLEDGE -->
+  <text x="28" y="567" class="layer-label">RAG PIPELINE &amp; KNOWLEDGE STORE</text>
+  <line x1="28" y1="573" x2="872" y2="573" class="section-line"/>
+
+  <rect x="28" y="583" width="252" height="65" rx="7" fill="#7048E8"/>
+  <text x="154" y="604" text-anchor="middle" class="box-title">Vector Store</text>
+  <text x="154" y="617" text-anchor="middle" class="box-sub">Runbook &amp; Postmortem Embeddings</text>
+  <text x="154" y="630" text-anchor="middle" class="box-sub">Hybrid: BM25 + Cosine Similarity</text>
+  <text x="154" y="643" text-anchor="middle" class="tech-tag">pgvector (PostgreSQL) + Reranker</text>
+
+  <rect x="298" y="583" width="252" height="65" rx="7" fill="#7048E8"/>
+  <text x="424" y="604" text-anchor="middle" class="box-title">Embedding Pipeline</text>
+  <text x="424" y="617" text-anchor="middle" class="box-sub">Semantic Chunking · Metadata Tags</text>
+  <text x="424" y="630" text-anchor="middle" class="box-sub">Incremental Re-indexing</text>
+  <text x="424" y="643" text-anchor="middle" class="tech-tag">BGE-large-en-v1.5 (HuggingFace)</text>
+
+  <rect x="568" y="583" width="290" height="65" rx="7" fill="#7048E8"/>
+  <text x="713" y="604" text-anchor="middle" class="box-title">Incident Knowledge Graph</text>
+  <text x="713" y="617" text-anchor="middle" class="box-sub">Causal Chains · Resolution Patterns</text>
+  <text x="713" y="630" text-anchor="middle" class="box-sub">"Error X → caused by Y → fixed by Z"</text>
+  <text x="713" y="643" text-anchor="middle" class="tech-tag">Neo4j (Cypher Queries)</text>
+
+  <line x1="280" y1="612" x2="298" y2="612" class="arrow-line" marker-end="url(#ah)"/>
+  <line x1="300" y1="648" x2="300" y2="700" class="arrow-line" marker-end="url(#ah)"/>
+  <line x1="600" y1="648" x2="600" y2="700" class="arrow-line" marker-end="url(#ah)"/>
+
+  <!-- LAYER 5: EVAL & LLMOPS -->
+  <text x="28" y="697" class="layer-label">EVAL HARNESS &amp; LLMOPS</text>
+  <line x1="28" y1="703" x2="872" y2="703" class="section-line"/>
+
+  <rect x="28" y="713" width="195" height="58" rx="7" fill="#f5f5f5" stroke="#ccc" stroke-width="1.5"/>
+  <text x="125" y="735" text-anchor="middle" class="outline-title">DeepEval Suite</text>
+  <text x="125" y="748" text-anchor="middle" class="outline-sub">Faithfulness · Relevancy</text>
+  <text x="125" y="762" text-anchor="middle" class="outline-sub">Precision · Recall · Hallucination</text>
+
+  <rect x="240" y="713" width="195" height="58" rx="7" fill="#f5f5f5" stroke="#ccc" stroke-width="1.5"/>
+  <text x="337" y="735" text-anchor="middle" class="outline-title">LangSmith Traces</text>
+  <text x="337" y="748" text-anchor="middle" class="outline-sub">Latency · Token Cost · Accuracy</text>
+  <text x="337" y="762" text-anchor="middle" class="outline-sub">Per-Agent &amp; Per-Incident</text>
+
+  <rect x="452" y="713" width="195" height="58" rx="7" fill="#f5f5f5" stroke="#ccc" stroke-width="1.5"/>
+  <text x="549" y="735" text-anchor="middle" class="outline-title">Prometheus + Grafana</text>
+  <text x="549" y="748" text-anchor="middle" class="outline-sub">Agent SLOs · Model Latency</text>
+  <text x="549" y="762" text-anchor="middle" class="outline-sub">Retrieval Hit Rate · Drift</text>
+
+  <rect x="664" y="713" width="195" height="58" rx="7" fill="#f5f5f5" stroke="#ccc" stroke-width="1.5"/>
+  <text x="761" y="735" text-anchor="middle" class="outline-title">CI/CD Eval Gates</text>
+  <text x="761" y="748" text-anchor="middle" class="outline-sub">GitHub Actions Pipeline</text>
+  <text x="761" y="762" text-anchor="middle" class="outline-sub">Block Merge if Eval Fails</text>
+
+  <line x1="445" y1="771" x2="445" y2="815" class="arrow-bold" marker-end="url(#ahd)"/>
+
+  <!-- LAYER 6: OUTPUTS -->
+  <text x="28" y="812" class="layer-label">OUTPUT CHANNELS</text>
+  <line x1="28" y1="818" x2="872" y2="818" class="section-line"/>
+
+  <rect x="55" y="828" width="155" height="50" rx="7" fill="#1F6FEB"/>
+  <text x="132" y="849" text-anchor="middle" class="box-title">Slack Alerts</text>
+  <text x="132" y="864" text-anchor="middle" class="box-sub">Incident Updates · Escalations</text>
+
+  <rect x="228" y="828" width="155" height="50" rx="7" fill="#1F6FEB"/>
+  <text x="305" y="849" text-anchor="middle" class="box-title">Status Page</text>
+  <text x="305" y="864" text-anchor="middle" class="box-sub">Public Incident Comms</text>
+
+  <rect x="401" y="828" width="155" height="50" rx="7" fill="#1F6FEB"/>
+  <text x="478" y="849" text-anchor="middle" class="box-title">Remediation Plan</text>
+  <text x="478" y="864" text-anchor="middle" class="box-sub">Step-by-Step Fix + Runbook</text>
+
+  <rect x="574" y="828" width="155" height="50" rx="7" fill="#1F6FEB"/>
+  <text x="651" y="849" text-anchor="middle" class="box-title">Dashboard</text>
+  <text x="651" y="864" text-anchor="middle" class="box-sub">Streamlit / Next.js UI</text>
+
+  <rect x="747" y="828" width="112" height="50" rx="7" fill="#1F6FEB"/>
+  <text x="803" y="849" text-anchor="middle" class="box-title">API</text>
+  <text x="803" y="864" text-anchor="middle" class="box-sub">REST / Webhooks</text>
+
+  <!-- LEGEND -->
+  <line x1="28" y1="900" x2="872" y2="900" class="section-line"/>
+  <rect x="28" y="912" width="12" height="12" rx="3" fill="#4A90D9"/>
+  <text x="46" y="922" class="legend-text">Data Sources</text>
+  <rect x="128" y="912" width="12" height="12" rx="3" fill="#E8590C"/>
+  <text x="146" y="922" class="legend-text">HF Task Models</text>
+  <rect x="240" y="912" width="12" height="12" rx="3" fill="#2DA44E"/>
+  <text x="258" y="922" class="legend-text">AI Agents</text>
+  <rect x="328" y="912" width="12" height="12" rx="3" fill="#1A7F37" stroke="#15692E" stroke-width="1"/>
+  <text x="346" y="922" class="legend-text">Supervisor</text>
+  <rect x="420" y="912" width="12" height="12" rx="3" fill="#7048E8"/>
+  <text x="438" y="922" class="legend-text">RAG / Knowledge</text>
+  <rect x="540" y="912" width="12" height="12" rx="3" fill="#f5f5f5" stroke="#ccc"/>
+  <text x="558" y="922" class="legend-text">Eval &amp; LLMOps</text>
+  <rect x="648" y="912" width="12" height="12" rx="3" fill="#1F6FEB"/>
+  <text x="666" y="922" class="legend-text">Outputs</text>
+  <rect x="728" y="912" width="12" height="12" rx="3" fill="none" stroke="#CF222E" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="746" y="922" class="legend-text">Human Gate</text>
+
+  <text x="450" y="952" text-anchor="middle" style="font-size:10px; fill:#999;">Tech Stack: LangGraph · LlamaIndex · pgvector · Neo4j · DeepEval · LangSmith · FastAPI · Docker · GitHub Actions</text>
+  <text x="450" y="968" text-anchor="middle" style="font-size:10px; fill:#999;">Models: distilbert · Florence-2 · BLIP-2 · bert-NER · BGE-large · BGE-reranker · Claude / GPT-4o · Llama 3.1</text>
+</svg>
